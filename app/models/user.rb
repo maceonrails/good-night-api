@@ -15,4 +15,8 @@ class User < ApplicationRecord
 
     clock_ins.clocked_in.first.clock_out!
   end
+
+  def clocked_in_past_week
+    clock_ins.clocked_in_past_week
+  end
 end
