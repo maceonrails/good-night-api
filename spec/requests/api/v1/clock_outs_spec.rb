@@ -5,7 +5,7 @@ RSpec.describe 'Clock Out API', type: :request do
     let(:user) { create(:user) }
 
     context 'when user is clocked in' do
-      before { create(:clock_in, user: user) }
+      let!(:clock_in) { create(:clock_in, user: user) }
 
       it 'returns 201' do
         post api_v1_clock_outs_path, params: { user_id: user.id }
@@ -17,9 +17,14 @@ RSpec.describe 'Clock Out API', type: :request do
           .to change { user.clock_outs.count }.by(1)
       end
 
-      it 'returns the past week of clock ins' do
+      it 'returns all clocked-in times order by created time' do
+        clock_in1 = create(:clock_in, :with_clock_out, time: 1.minute.ago, user: user)
+        clock_in2 = create(:clock_in, :with_clock_out, time: 3.minutes.ago, user: user)
+        clock_in3 = create(:clock_in, :with_clock_out, time: 2.minutes.ago, user: user)
+
         post api_v1_clock_outs_path, params: { user_id: user.id }
-        expect(response.body).to eq(user.clocked_in_past_week.to_json)
+
+        expect(response.body).to eq([clock_in, clock_in1, clock_in2, clock_in3].to_json)
       end
     end
 

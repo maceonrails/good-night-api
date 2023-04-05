@@ -10,6 +10,6 @@ class ClockIn < ApplicationRecord
   scope :clocked_in_past_week, -> { where('clock_ins.created_at > ?', 1.week.ago).order(:created_at) }
 
   def clock_out!
-    create_clock_out!
+    create_clock_out!(time: Time.zone.now)
   end
 end

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   def clock_in!
     return false if clock_ins.clocked_in.any?
 
-    clock_ins.create!
+    clock_ins.create!(time: Time.zone.now)
   end
 
   def clock_out!
