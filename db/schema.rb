@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_104344) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_131025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_104344) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "time"
     t.index ["user_id"], name: "index_clock_ins_on_user_id"
   end
 
@@ -25,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_104344) do
     t.bigint "clock_in_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "time"
     t.index ["clock_in_id"], name: "index_clock_outs_on_clock_in_id"
   end
 
