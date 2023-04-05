@@ -62,7 +62,5 @@ RSpec.describe ClockIn, type: :model do
         expect(ClockIn.past_week_sleep_records).to eq([clock_in])
       end
     end
-
-
   end
 end
