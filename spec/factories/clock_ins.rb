@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :clock_in do
     user { nil }
+  time { Time.zone.now }
 
     trait :with_clock_out do
       after(:create) do |clock_in|

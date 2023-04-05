@@ -4,7 +4,9 @@ Rails.application.routes.draw do
       resources :clock_ins, only: :create
       resources :clock_outs, only: :create
       resources :users, only: [] do
-        resources :friends, only: %i[create destroy]
+        resources :friends, only: %i[create destroy] do
+          resources :sleeps, only: :index, controller: 'friend_sleeps'
+        end
       end
     end
   end

@@ -33,4 +33,8 @@ class User < ApplicationRecord
 
     friendships.find_by(friend: friend).destroy
   end
+
+  def past_week_sleep_records
+    clock_ins.past_week_sleep_records
+  end
 end

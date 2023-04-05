@@ -44,5 +44,25 @@ RSpec.describe ClockIn, type: :model do
         end
       end
     end
+
+    describe '.order_by_sleep_duration' do
+      let!(:clock_in) { create(:clock_in, user: user) }
+      let!(:clock_out) { create(:clock_out, clock_in: clock_in) }
+
+      it 'orders by sleep duration' do
+        expect(ClockIn.order_by_sleep_duration).to eq([clock_in])
+      end
+    end
+
+    describe '.past_week_sleep_records' do
+      let!(:clock_in) { create(:clock_in, user: user) }
+      let!(:clock_out) { create(:clock_out, clock_in: clock_in) }
+
+      it 'returns past week sleep records' do
+        expect(ClockIn.past_week_sleep_records).to eq([clock_in])
+      end
+    end
+
+
   end
 end
